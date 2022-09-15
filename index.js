@@ -27,6 +27,28 @@ async function run() {
       res.send(result)
     })
 
+    app.post("/post", async (req, res) => {
+      const blogs = req.body;
+      const result = await postsCollection.insertOne(blogs)
+      res.send(result)
+    })
+
+    app.get("/post", async (req, res) => {
+      const email = req.query?.email;
+      const filter = { email: email };
+      const result = await postsCollection.find(filter).toArray();
+      res.send(result)
+    })
+
+
+    // Delete Blogs
+    app.delete("/post/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
+      const result = await postsCollection.deleteOne(filter);
+      res.send(result)
+    })
+
   }
   catch {
 
