@@ -29,14 +29,14 @@ async function run() {
 
     app.post("/post", async (req, res) => {
       const blogs = req.body;
-      const result = await postsCollection.insertOne(blogs)
+      const result = await blogsCollection.insertOne(blogs)
       res.send(result)
     })
 
     app.get("/post", async (req, res) => {
       const email = req.query?.email;
       const filter = { email: email };
-      const result = await postsCollection.find(filter).toArray();
+      const result = await blogsCollection.find(filter).toArray();
       res.send(result)
     })
 
@@ -45,7 +45,7 @@ async function run() {
     app.delete("/post/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
-      const result = await postsCollection.deleteOne(filter);
+      const result = await blogsCollection.deleteOne(filter);
       res.send(result)
     })
 
