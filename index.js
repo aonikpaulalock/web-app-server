@@ -16,9 +16,9 @@ app.get('/', (req, res) => {
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.2j2my5l.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-async function run() {
+function run() {
   try {
-    await client.connect()
+    client.connect()
     const blogsCollection = client.db("Posts").collection("blogs");
 
     // Get Blogs Data
